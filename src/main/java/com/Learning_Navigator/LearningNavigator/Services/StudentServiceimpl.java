@@ -50,8 +50,14 @@ public class StudentServiceimpl implements StudentService {
         // TODO Auto-generated method stub
         java.util.Optional<Student> s =studentRepository.findById(student.getStudentId());
         if(s.isPresent()){
+            Student a= s.get();
+            a.setStudentId(student.getStudentId());
+            a.setEnrolledSubjects(student.getEnrolledSubjects());
+            a.setExamEnrolled(student.getExamEnrolled());
+            a.setStudentName(student.getStudentName());
             studentRepository.delete(s.get());
-            return studentRepository.save(student);
+
+            return studentRepository.save(a);
 
         }
         else{

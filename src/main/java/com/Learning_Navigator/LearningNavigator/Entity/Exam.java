@@ -1,5 +1,6 @@
 package com.Learning_Navigator.LearningNavigator.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,11 +12,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Exam {
     
 
@@ -23,12 +29,21 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long examId;
 
-    @ManyToOne
+    public Exam(Subject subject, List<Student> numberofStudenttogiveExam) {
+    this.subject = subject;
+    this.numberofStudenttogiveExam = numberofStudenttogiveExam;
+}
+
+    @OneToOne
     private Subject subject;
 
-    @ManyToMany(mappedBy = "examEnrolled", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-     @JsonBackReference
-    private List<Student> numberofStudenttogiveExam;
+    public Exam(Subject subject) {
+        this.subject = subject;
+    }
+
+    @ManyToMany(mappedBy = "examEnrolled")
+    @JsonBackReference
+    private List<Student> numberofStudenttogiveExam=new ArrayList<>();
 
      @Override
     public boolean equals(Object o) {

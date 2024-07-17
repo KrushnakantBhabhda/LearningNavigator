@@ -1,3 +1,4 @@
+
 package com.Learning_Navigator.LearningNavigator;
 
 import org.springframework.boot.SpringApplication;

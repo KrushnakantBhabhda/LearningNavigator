@@ -45,7 +45,10 @@ public class SubjectServiceimpl implements SubjectService {
         // TODO Auto-generated method stub
         Optional<Subject> s=subjectRepository.findById(subject.getSubjectId());
         if(s.isPresent()){
-            subjectRepository.delete(s.get());
+            Subject a =s.get();
+            a.setSubjectId(subject.getSubjectId());
+            a.setSubjectName(subject.getSubjectName());
+            a.setRegisteredStudents(subject.getRegisteredStudents());
             return subjectRepository.save(subject);
         }
         else{

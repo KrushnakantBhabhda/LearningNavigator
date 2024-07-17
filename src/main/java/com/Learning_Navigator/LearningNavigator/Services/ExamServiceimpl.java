@@ -78,8 +78,12 @@ public class ExamServiceimpl implements ExamService {
         // throw new UnsupportedOperationException("Unimplemented method 'updateExam'");
         java.util.Optional<Exam> e=examRepository.findById(exam.getExamId());
         if(e.isPresent()){
+            Exam a=e.get();
+            a.setExamId(exam.getExamId());
+            a.setSubject(exam.getSubject());
+            a.setNumberofStudenttogiveExam(exam.getNumberofStudenttogiveExam());
             examRepository.delete(e.get());
-            return examRepository.save(exam);
+            return examRepository.save(a);
         }
         else{
             throw new ResourceNotFoundException("Exam not present");
